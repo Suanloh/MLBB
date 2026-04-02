@@ -41,8 +41,6 @@ model.fit(x_train, y_train, epochs=5)
 # 1. Pick an index (e.g., 0, 6, or any number up to 9999)
 image_index = 5173
 
-# 2. Reshape the image to add a "batch" dimension
-# Models expect a list of images, so we turn [28, 28] into [1, 28, 28]
 input_image = x_test[image_index:image_index+1]
 
 # 3. Get the prediction
