@@ -290,3 +290,25 @@ if best_t is not None:
     print(classification_report(y_test, y_pred_best, digits=4))
 else:
     print("No threshold achieved the target recall; try lowering target_recall or improving the model.")
+    
+ # ==========================================
+# 8) THRESHOLD TUNING showing infomations at specific thresholds 
+# ==========================================  
+
+from sklearn.metrics import precision_score, recall_score, f1_score, confusion_matrix
+
+def report_at_threshold(t):
+    pred = (y_proba >= t).astype(int)
+    p = precision_score(y_test, pred, zero_division=0)
+    r = recall_score(y_test, pred)
+    f1 = f1_score(y_test, pred, zero_division=0)
+    cm = confusion_matrix(y_test, pred)
+    return p, r, f1, cm
+
+for t in [0.50, 0.90]:
+    p, r, f1, cm = report_at_threshold(t)
+    print(f"\nThreshold = {t}")
+    print("Precision:", p)
+    print("Recall:", r)
+    print("F1:", f1)
+    print("Confusion matrix:\n", cm)
